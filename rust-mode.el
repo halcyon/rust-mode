@@ -1523,7 +1523,7 @@ This is written mainly to be used as `end-of-defun-function' for Rust."
 (defun rust-test ()
   "Test using `cargo test`"
   (interactive)
-  (compile (format "%s test" rust-cargo-bin)))
+  (compile (format "%s test %s" rust-cargo-bin rust-no-capture)))
 
 (defvar rust-mode-map
   (let ((map (make-sparse-keymap)))
@@ -1585,6 +1585,7 @@ This is written mainly to be used as `end-of-defun-function' for Rust."
   (add-hook 'after-save-hook 'rust-after-save-hook nil t)
 
   (setq-local rust-buffer-project nil)
+  (setq-local rust-no-capture "-- --nocapture")
 
   (when rust-always-locate-project-on-open
     (rust-update-buffer-project)))
